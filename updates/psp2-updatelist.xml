@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<update_data_list>
+    <region id="{{REGION}}">
+        <np level0_system_version="01.600.000" level1_system_version="03.600.000" level2_system_version="03.600.000" map="03.600.000"/>
+        <np_d level0_system_version="01.600.000" level1_system_version="03.600.000" level2_system_version="03.600.000" map="03.600.000"/>
+        <version system_version="03.600.000" label="3.60">
+            <update_data update_type="full">
+                <image size="133676544">http://d{{REGION}}01.psp2.update.playstation.net/update/psp2/image/2016_0406/rel_cd80b3da55771c99557db552542dff2b/PSP2UPDAT.PUP</image>
+            </update_data>
+        </version>
+    </region>
+</update_data_list>
