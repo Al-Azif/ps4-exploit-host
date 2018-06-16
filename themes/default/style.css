@@ -20,7 +20,7 @@ body {
     width: 100%;
 }
 #contentBody {
-    padding: 40px 50px 20px;
+    margin: 40px 50px 20px;
     color: #333;
 }
 #ifr {
