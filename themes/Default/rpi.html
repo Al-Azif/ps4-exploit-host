@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Remote Package Installer by Flatz</title>
+<link rel="stylesheet" href="/themes/default/bootstrap.min.css">
+<link rel="stylesheet" href="/themes/default/default.css">
+<script src="/themes/default/jquery-3.3.1.min.js"></script>
+<script src="/themes/default/popper.min.js"></script>
+<script src="/themes/default/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="overlay" id="offlineOverlay">
+<div class="centeredText">You cannot use remote package installer while offline!</div>
+</div>
+<div class="overlay" id="sendingOverlay">
+<div id="exploitLoader">Sending...</div>
+</div>
+<div class="content-title">
+<h1 id="title">Remote Package Installer</h1>
+</div>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-12">
+<div class="content-header">
+<h3 id="header">Install</h3>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="mx-auto col-sm-6" id="responseText"></div>
+</div>
+<div class="row">
+<div class="mx-auto mb-2 col-sm-4">
+  <form class="form-inline">
+  <label for="ip" class="pr-2">IP:</label>
+  <input type="text" class="form-control d-inline-block" id="ip" value="0.0.0.0">
+  </form>
+</div>
+</div>
+<div class="mx-auto col-sm-6">
+<div class="d-flex flex-row">
+  <div class="nav flex-column nav-pills mr-2" id="pills-tab" role="tablist" aria-orientation="vertical">
+    <a class="nav-link active" id="install-tab" data-toggle="pill" href="#install" role="tab" aria-controls="install" aria-selected="true">Install</a>
+    <a class="nav-link" id="uninstall-tab" data-toggle="pill" href="#uninstall" role="tab" aria-controls="uninstall" aria-selected="false">Uninstall</a>
+    <a class="nav-link" id="tasks-tab" data-toggle="pill" href="#tasks" role="tab" aria-controls="tasks" aria-selected="false">Tasks</a>
+    <a class="nav-link" id="about-tab" data-toggle="pill" href="#about" role="tab" aria-controls="about" aria-selected="false">About</a>
+  </div>
+  <div class="tab-content w-100 border-top border-bottom py-2" id="tabContent">
+    <div class="py-2 pl-2" id="meta-info">
+    <div class="card flex-row flex-wrap">
+      <div class="card-header p-0 m-0 border-0">
+        <img style="width: 10rem;" id="meta-icon">
+      </div>
+      <div class="card-block mx-3 my-auto">
+        <h4 id="meta-name">*</h4>
+      </div>
+    </div>
+    </div>
+    <div class="tab-pane fade show active" id="install" role="tabpanel" aria-labelledby="install-tab">
+      <div class="input-group pl-2">
+        <input type="text" class="form-control" id="installURL" value="http://">
+        <div class="input-group-append">
+          <button class="btn btn-outline-primary" type="button" id="btn-install-cdn">CDN</button>
+          <button class="btn btn-primary" type="button" id="btn-install-url">URL</button>
+        </div>
+      </div>
+      <hr>
+      <label>Self Hosted PKGs</label><input type="text" class="form-control float-right w-50" id="pkgSearch" placeholder="Search">
+      <div class="clearfix pb-2"></div>
+      <div class="d-flex flex-column" id="pkg-container">
+        <div class="list-group" id="pkg-list"></div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="uninstall" role="tabpanel" aria-labelledby="uninstall-tab">
+      <div class="input-group pl-2 mb-2">
+        <input type="text" class="form-control" id="uninstallID" placeholder="PKG ID">
+        <div class="input-group-append">
+          <button class="btn btn-primary" type="button" id="btn-uninstall">Uninstall</button>
+        </div>
+      </div>
+      <div class="row">
+      <div class="mx-auto">
+      <div class="col-sm-12">
+      <div class="form-check-inline">
+        <input class="form-check-input" type="radio" name="uninstallRadios" id="uninstallRadioGame" value="uninstall_game" checked>
+        <label class="form-check-label" for="uninstallRadioGame">Game</label>
+      </div>
+      <div class="form-check-inline">
+        <input class="form-check-input" type="radio" name="uninstallRadios" id="uninstallRadioPatch" value="uninstall_patch">
+        <label class="form-check-label" for="uninstallRadioPatch">Patch</label>
+      </div>
+      <div class="form-check-inline">
+        <input class="form-check-input" type="radio" name="uninstallRadios" id="uninstallRadioAC" value="uninstall_ac">
+        <label class="form-check-label" for="uninstallRadioAC">Additional Content</label>
+      </div>
+      <div class="form-check-inline">
+        <input class="form-check-input" type="radio" name="uninstallRadios" id="uninstallRadioTheme" value="uninstall_theme">
+        <label class="form-check-label" for="uninstallRadioTheme">Theme</label>
+      </div>
+      </div>
+      </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="tasks" role="tabpanel" aria-labelledby="tasks-tab">
+      <div class="input-group pl-2 mb-2">
+        <input type="text" class="form-control" id="taskContentID" placeholder="Content ID">
+        <div class="input-group-append">
+          <button class="btn btn-primary" type="button" id="btn-task-find">Find</button>
+        </div>
+      </div>
+      <div class="row">
+      <div class="mx-auto">
+      <div class="col-sm-12">
+      <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="taskRadios" id="taskRadioGame" value="6" checked>
+          <label class="form-check-label" for="taskRadioGame">Game</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="taskRadios" id="taskRadioPatch" value="8">
+          <label class="form-check-label" for="taskRadioPatch">Patch</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="taskRadios" id="taskRadioAC" value="7">
+          <label class="form-check-label" for="taskRadioAC">Additional Content</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="taskRadios" id="taskRadioLicense" value="9">
+          <label class="form-check-label" for="taskRadioLicense">License</label>
+        </div>
+      </div>
+      </div>
+      </div>
+      <hr>
+      <input type="text" class="form-control w-50 mx-auto mb-2" id="taskID" placeholder="Task ID">
+      <div class="row">
+      <div class="mx-auto">
+      <div class="col-sm-12">
+      <button type="submit" class="btn btn-primary" id="btn-task-start">Start</button>
+      <button type="submit" class="btn btn-primary" id="btn-task-stop">Stop</button>
+      <button type="submit" class="btn btn-primary" id="btn-task-pause">Pause</button>
+      <button type="submit" class="btn btn-primary" id="btn-task-resume">Resume</button>
+      <button type="submit" class="btn btn-primary" id="btn-task-unregister">Unregister</button>
+      <button type="submit" class="btn btn-primary" id="btn-task-progress">Progress</button>
+      </div>
+      </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="about" role="tabpanel" aria-labelledby="about-tab">
+      <p class="pl-2">This is an interface for Flatz's Remote PKG Installer you can find the release notes <a href="https://gist.github.com/flatz/60956f2bf1351a563f625357a45cd9c8">here</a>.<br><br>
+      PKG Link: <a href="https://mega.nz/#!2dN1XajB!Z5fXyFoKOXFI_ujgGoCZfFFy5nyn7OWo6vF6h_HmWhQ">Here</a><br>
+      Created by: <a href="https://twitter.com/flat_z">Flatz</a></p>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<script src="/themes/default/sha.js"></script>
+<script src="/themes/default/rpi.js"></script>
+</body>
+</html>
+<!--
+Copyright (c) 2017-2019 Al Azif, https://github.com/Al-Azif/ps4-exploit-host
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-->
