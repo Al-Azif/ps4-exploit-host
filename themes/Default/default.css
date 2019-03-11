@@ -4,7 +4,6 @@ html {
 }
 
 body {
-  background-image: url('./image.png');
   background-position: right bottom;
   background-repeat: no-repeat;
   background-attachment: fixed;
