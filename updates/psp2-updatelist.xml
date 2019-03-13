@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<update_data_list>
+    <region id="{{REGION}}">
+        <np level0_system_version="01.600.000" level1_system_version="03.650.000" level2_system_version="03.650.000" map="03.650.000" />
+        <np_d level0_system_version="01.600.000" level1_system_version="03.650.000" level2_system_version="03.650.000" map="03.650.000" />
+        <version system_version="03.650.000" label="3.65">
+            <update_data update_type="full">
+                <image size="{{FULL_SIZE}}">http://d{{REGION}}01.psp2.update.playstation.net/update/psp2/image/2017_0317/rel_0a0f2a9ae58968ac5d1d2127049c3cba/PSP2UPDAT.PUP</image>
+            </update_data>
+        </version>
+        <recovery spkg_type="systemdata">
+            <image spkg_version="01.000.010" size="{{SYSTEMDATA_SIZE}}">http://d{{REGION}}01.psp2.update.playstation.net/update/psp2/image/2017_0317/sd_6bf8d11ac2098007eefffae39af387ca/PSP2UPDAT.PUP</image>
+        </recovery>
+        <recovery spkg_type="preinst">
+            <image spkg_version="01.000.000" size="{{PREINST_SIZE}}">http://d{{REGION}}01.psp2.update.playstation.net/update/psp2/image/2017_0317/pre_2e659666f31b8789f738623f09e1c05d/PSP2UPDAT.PUP</image>
+        </recovery>
+    </region>
+</update_data_list>
