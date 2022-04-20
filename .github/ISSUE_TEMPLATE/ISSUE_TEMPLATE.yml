@@ -1,0 +1,24 @@
+name: Issue
+description: Template for issues.
+body:
+  - id: disclaimer
+    type: markdown
+    attributes:
+      value: |
+        My issue is not:
+          * Covered in the Readme/FAQ.
+          * Related to the Remote DNS you host.
+          * Related to issues with payloads/exploits packaged in the release but with the host itself.
+          * Already an open issue.
+          * An ETA/release request for updates, exploits, payloads, etc.
+          * A exploit/payload request, as I can easily add exploits/payloads to the self host myself.
+          * A request for troubleshooting issues unrelated to the host.
+          * About an anti-virus false positive.
+          * A common one with an answer that can be easily researched.
+  - id: validation
+    type: checkboxes
+    attributes:
+      label: Validation
+      options:
+        - label: By checking this I agree I have read the above. If my issue is in regards to something listed above I agree to have my issue closed without comment.
+          required: true
